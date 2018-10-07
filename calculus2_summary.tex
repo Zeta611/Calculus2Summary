@@ -228,4 +228,82 @@
     이다.
 \end{definition}
 
+\subsection{미분가능함수}
+
+\begin{definition}
+    $n$-공간의 원점 근방에서 정의된 두 함수 $g(\vec v)$, $h(\vec v)$에 대하여
+    \begin{equation*}
+        g(\vec v) = o(h(\vec v))
+    \end{equation*}
+    라는 것은 다음을 뜻한다:
+    \begin{equation*}
+        \forall \epsilon > 0 \quad \exists \delta > 0 \quad \forall \vec v \quad \bigl(0 < |\vec v| < \delta \Rightarrow |g(\vec v)| \leq \epsilon |h(\vec v)|\bigr)
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    $n$-공간의 열린 집합 $U$에서 정의된 함수 $f: U \rightarrow \mathbb R$와 $U$의 점 $P$에 대하여
+    \begin{equation} \label{eq:diff_def}
+        \lim_{\vec v \rightarrow \vecz} \frac{|f(P + \vec v) - f(P) - \vec a \cdot \vec v|}{|\vec v|} = 0,
+    \end{equation}
+    즉
+    \begin{equation} \label{eq:diff_alt_def}
+        f(P + \vec v) = f(P) + \vec a \cdot \vec v + o(\vec v)
+    \end{equation}
+    를 만족시키는 벡터 $\vec a$가 존재하면 $f$는 점 $P$에서 미분가능하다고 한다.
+
+    만약 $f$가 정의역의 모든 점에서 미분가능하면 $f$는 미분가능하다고 한다.
+\end{definition}
+
+\begin{theorem}
+    $n$-공간의 열린 집합 $U$에서 정의된 함수 $f:U \rightarrow \mathbb R$가 점 $P \in U$에서 미분가능하면
+    \begin{enumerate}
+        \item $f$는 점 $P$에서 연속이다.
+        \item $f$는 점 $P$에서 모든 방향의 방향미분계수를 가지고
+            \begin{equation*}
+                \dD_{\vec v} f(P) = \grad f(P) \cdot \vec v \quad (\vec v \in \mathbb R^n)
+            \end{equation*}
+            이다.
+        \item 식~\ref{eq:diff_def}을 만족시키는 벡터 $\vec a$는 $\grad f(P)$이다.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    1. 식~\ref{eq:diff_alt_def}에서
+    \begin{equation*}
+        \lim_{\vec v \rightarrow \vecz} f(P + \vec v) = \lim_{\vec v \rightarrow \vecz} \bigl(f(P) + \vec a \cdot \vec v + o(\vec v)\bigr) = f(P)
+    \end{equation*}
+    이다.
+
+    2, 3. 식~\ref{eq:diff_def}에 의하면, 어떤 벡터 $\vec v$에 대하여
+    \begin{equation*}
+        \lim_{|t \vec v| \rightarrow 0} \frac{|f(P + t \vec v) - f(P) - \vec a \cdot t \vec v|}{|t \vec v|} = 0
+    \end{equation*}
+    을 만족한다.
+    즉,
+    \begin{equation*}
+        \frac{1}{|\vec v|} \lim_{t \rightarrow 0} \frac{f(P + t \vec v) - f(P) - \vec a \cdot t \vec v}{t} = \frac{1}{|\vec v|} \lim_{t \rightarrow 0} \frac{f(P + t \vec v) - f(P)}{t} - \vec a \cdot \frac{\vec v}{|\vec v|} = 0
+    \end{equation*}
+    이다.
+    따라서 방향미분 $\dD_{\vec v} f(P)$가 존재하고
+    \begin{equation*}
+        \dD_{\vec v} f(P) = \lim_{t \rightarrow 0} \frac{f(P + t \vec v) - f(P)}{t} = \vec a \cdot \vec v
+    \end{equation*}
+    이다.
+
+    이제 $\vec a = (a_1, \dots, a_n)$으로 두면
+    \begin{equation*}
+        \dD_i f(P) = \dD_{\vec e_i} f(P) = \vec a \cdot \vec e_i = a_i
+    \end{equation*}
+    이고
+    \begin{equation*}
+        \grad f(P) = \bigl(\dD_1 f(P), \dots, \dD_n f(P)\bigr) = (a_1, \dots, a_n) = \vec a
+    \end{equation*}
+    이다.
+    따라서
+    \begin{equation*}
+        \dD_{\vec v} f(P) = \vec a \cdot \vec v = \grad f(P) \cdot \vec v
+    \end{equation*}
+    이다.
+\end{proof}
 \end{document}
