@@ -27,6 +27,7 @@
 \newcommand{\vecz}{\bm{\mathrm{0}}}
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\dD}{\mathrm{D}}
+\DeclareMathOperator{\grad}{grad}
 
 \title{수학 및 연습 2\\내용 요약}
 
@@ -160,6 +161,7 @@
 \end{theorem}
 
 \subsection{방향미분과 편미분}
+
 \begin{definition}
     $n$-공간의 열린 집합 $U$에서 정의된 함수 $f: U \rightarrow \mathbb R$와 $U$의 한 점 $P$ 및 벡터 $\vec v$에 대하여, 극한값
     \begin{equation*}
@@ -168,4 +170,62 @@
     가 존재하면 이 값을 점 $P$에서 $f$의 $\vec v$-방향미분계수 또는 $\vec v$-방향 순간변화율이라고 한다.
     단위벡터 $\vec v$에 대하여 $\vec v$-방향미분계수의 기하학적 의미는 함수 $f$의 그래프를 직선 $P + t \vec v$ 위에 한정하여 그렸을 때, 점 $(P, f(P))$에서 $f$의 그래프의 기울기를 뜻한다.
 \end{definition}
+
+\subsubsection{편도함수}
+
+\begin{definition}
+    $n$-공간의 표준단위벡터는
+    \begin{equation*}
+        \vec e_1 := (1, 0, \dots, 0),\quad\dots,\quad\vec e_n := (0, 0, \dots, 1)
+    \end{equation*}
+    을 말한다.
+\end{definition}
+
+\begin{definition}
+    점 $P = (p_1, \dots, p_n)$에서 함수 $f: U \rightarrow \mathbb R$의 $\vec e_k$-방향미분계수 $\dD_{\vec e_k} f(P)$를 단순히
+    \begin{equation*}
+        \dD_k f(P)
+    \end{equation*}
+    로 쓰고, 점 $P$에서의 $f$의 $k$번째 편미분계수라고 한다.
+    좌표의 성분을 써서 표시하면,
+    \begin{equation*}
+        \dD_k f(P) = \diff*{}{t}{0} f(p_1, \dots, p_k + t, \dots, p_n)
+    \end{equation*}
+    이다.
+    이 값은 $P = (p_1, \dots, p_n)$의 $k$번째 성분만 변화시켜 얻은 변화율이다.
+    이런 뜻에서 $\dD_k f(P)$를 $\diffp{f}{x_k} (P)$로 쓰기도 한다:
+    \begin{equation*}
+        \diffp{f}{x_k} := \dD_k f.
+    \end{equation*}
+    함수 $f$의 $k$번째 편미분계수 $\diffp{f}{x_k}$는 $k$번째 성분만을 변수로 하고, 나머지 변수는 상수로 보았을 때 얻은 미분계수이다.
+\end{definition}
+
+\begin{definition}
+    함수 $f$가 정의역 $U$의 모든 점에 대하여 $k$번째 편미분계수를 가지면 함수
+    \begin{equation*}
+        \dD_k f: U \rightarrow \mathbb R,\quad P \mapsto \dD_k f(P)
+    \end{equation*}
+    를 $f$의 $k$번째 편도함수라고 한다.
+\end{definition}
+
+\subsubsection{기울기 벡터}
+
+\begin{definition}
+    $n$변수함수 $f$의 모든 편미분계수가 점 $P$에서 존재할 때, $f$는 점 $P$에서 편미분가능하다고 한다.
+    이때 벡터
+    \begin{equation*}
+        \grad f(P) := (\dD_1 f(P), \dots, \dD_n f(P))
+    \end{equation*}
+    를 $P$에서 $f$의 그레이디언트 벡터(gradient vector) 또는 기울기 벡터라고 한다.
+
+    일변수함수 $f(x)$의 그래프에서 접선의 기울기가 바로 $f'(x)$이듯이, 다변수 함수 $f(X)$의 그래프에서 ``접평면''의 기울기 벡터가 바로 $\grad f(P)$이다.
+
+    $\grad f$를 $\nabla f$로 쓰기도 한다.
+    즉
+    \begin{equation*}
+        \nabla = (\dD_1, \dots, \dD_n) = \left(\diffp*{}{x_1}, \dots, \diffp*{}{x_n}\right)
+    \end{equation*}
+    이다.
+\end{definition}
+
 \end{document}
