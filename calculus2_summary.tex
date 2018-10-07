@@ -5,7 +5,6 @@
 \usepackage{bm}
 
 \setcounter{secnumdepth}{4}
-\renewcommand{\thesubsection}{\arabic{subsection}}
 
 \usepackage{mathpazo}
 \setmainfont{TeX Gyre Pagella}
@@ -21,6 +20,8 @@
 \newtheorem{theorem}{정리}[subsubsection]
 \newtheorem{corollary}{따름정리}[subsubsection]
 \newtheorem{lemma}{도움정리}[subsubsection]
+
+\renewcommand*{\proofname}{증명}
 
 \usepackage{diffcoeff}
 \diffset[roman = true]
@@ -356,7 +357,7 @@
     \begin{align*}
         &\hphantom{=\ \ } f\bigl(X(t + \Delta t)\bigr) - f\bigl(X(t)\bigr)\\
         &= \grad f\bigl(X(t)\bigr) \cdot \bigl(X(t + \Delta t) - X(t)\bigr) + o(|X(t + \Delta t) - X(t)|)\\
-        &= \grad f\bigl(X(t)\bigr) \cdot \bigl(X'(t)\Delta t o(\Delta t)\bigr) + o(\Delta t)\\
+        &= \grad f\bigl(X(t)\bigr) \cdot \bigl(X'(t)\Delta t + o(\Delta t)\bigr) + o(\Delta t)\\
         &= \grad f\bigl(X(t)\bigr) \cdot X'(t) \Delta t + o(\Delta t)
     \end{align*}
     이므로 원하는 결론을 얻는다.
@@ -459,5 +460,73 @@
     \end{equation*}
     는 $\dD_{i_1}, \dD_{i_2}, \dots, \dD_{i_k}$의 순서를 바꾸어도 변화가 없다.
 \end{corollary}
+
+\subsubsection{방향미분작용소}
+일급함수 $f(x_1, \dots, x_n)$와 벡터 $\vec v = v_1 \vec e_1 + \dots + v_n \vec e_n$에 대하여
+\begin{equation*}
+    \dD_{\vec v} f = \vec v \cdot \grad f = (v_1 \dD_1 + \dots + v_n \dD_n) f
+\end{equation*}
+임을 알고 있다.
+이 식을
+\begin{equation*}
+    \dD_{\vec v} = v_1 \dD_1 + \dots + v_n \dD_n
+\end{equation*}
+으로 쓰기로 한다.
+
+$f$가 이급이면
+\begin{equation*}
+    \dD_{\vec v}^2 = \left(\sum_{i = 1}^n v_i \dD_i \right)^2 = \sum_{i, j = 1}^n v_i v_j \dD_i \dD_j
+\end{equation*}
+이다.
+이차원에서는 벡터 $\vec v = a \vec i + b \vec j = (a, b)$에 대하여
+\begin{equation*}
+    \dD_{(a, b)}^2 = a^2 \dD_1^2 + 2ab \dD_1 \dD_2 + b^2 \dD_2^2
+\end{equation*}
+을 얻는다.
+
+함수의 일계미분계수가 함수의 순간변화율 또는 ``기울기''를 나타내듯이 함수의 이계미분계수는 함수의 오목$\cdot$볼록성을 말하여 준다.
+다변수함수인 경우에는 오목$\cdot$볼록성을 조사하기 위하여 여전히 방향이 주어져야 하고, 이때 $\vec v$-방향 이계미분계수는
+\begin{equation*}
+    \dD_{\vec v}^2 f(P)
+\end{equation*}
+이다.
+
+\begin{lemma}
+    $n$-공간의 열린 집합에서 정의된 이급함수 $f$와 정의역의 임의의 점 $P$ 및 벡터 $\vec v$에 대하여
+    \begin{equation*}
+        \diff*[2]{}{t}{0} f(P + t \vec v) = \dD_{\vec v}^2 f(P)
+    \end{equation*}
+    이다.
+\end{lemma}
+
+\begin{proof}
+    연쇄법칙에서
+    \begin{equation*}
+        \diff*{f(P + t \vec v)}{t} = \grad f(P + t \vec v) \cdot \vec v = \dD_{\vec v} f(P + t \vec v)
+    \end{equation*}
+    임을 안다.
+    따라서
+    \begin{equation*}
+        \diff*[2]{f(P+ t \vec v)}{t} = \diff*{(\dD_{\vec v}f)}{t} (P + t \vec v) = \dD_{\vec v} (\dD_{\vec v}f)(P + t \vec v)
+    \end{equation*}
+    이다.
+    이제 $t = 0$으로 두면 원하는 결론을 얻는다.
+\end{proof}
+
+이 정리에서
+\begin{align*}
+    \dD_{\vec v}^2 f(P) > 0 \text{이면, $f$는 점 $P$에서 $\vec v$방향으로 볼록}\\
+    \dD_{\vec v}^2 f(P) < 0 \text{이면, $f$는 점 $P$에서 $\vec v$방향으로 오목}
+\end{align*}
+임을 안다.
+
+\subsubsection{고계미분계수}
+함수 $f(x, y)$가 삼급함수이면 벡터 $\vec v = (a, b)$에 대하여
+\begin{align*}
+    \dD_{\vec v}^3 f &:= \dD_{\vec v} \bigl(\dD_{\vec v}^2 f\bigr)\\
+                     &= (a \dD_1 + b \dD_2) \bigl(a^2 \dD_1^2 f + 2ab \dD_1 \dD_2 f + b^2 \dD_2^2 f\bigr)\\
+                     &= a^3 \dD_1^3 f + 3a^2 b \dD_1^2 \dD_2 f + 3ab^2 \dD_1 \dD_2^2 f + b^3 \dD_2^3 f
+\end{align*}
+이다.
 
 \end{document}
