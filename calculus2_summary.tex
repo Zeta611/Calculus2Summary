@@ -255,7 +255,7 @@
     만약 $f$가 정의역의 모든 점에서 미분가능하면 $f$는 미분가능하다고 한다.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem} \label{thm:grad_differential}
     $n$-공간의 열린 집합 $U$에서 정의된 함수 $f:U \rightarrow \mathbb R$가 점 $P \in U$에서 미분가능하면
     \begin{enumerate}
         \item $f$는 점 $P$에서 연속이다.
@@ -306,4 +306,38 @@
     \end{equation*}
     이다.
 \end{proof}
+
+따라서, 함수 $f$가 점 $P$에서 미분가능할 필요충분조건은
+\begin{enumerate}
+    \item $\grad f(P)$가 존재하고
+    \item $f(P + \vec v) - f(P) = \grad f(P) \cdot \vec v + o(\vec v)$
+\end{enumerate}
+인 것이다.
+따라서 기울기 벡터 $\grad f(P)$를 점 $P$에서 $f$의 미분계수라고 하고, $f'(P)$ 또는 $\dD f(P)$로 쓰기도 한다.
+
+\subsubsection{기울기 벡터와 함수의 변화율}
+정리~\ref{thm:grad_differential}에서 $\vec v$가 단위벡터이고, $\vec v$와 $\grad f(P)$가 이루는 각의 크기가 $\theta$라면,
+\begin{equation*}
+    \dD_{\vec v} f(P) = \grad f(P) \cdot \vec v = |\grad f(P)| \cos \theta
+\end{equation*}
+이므로, $\dD_{\vec v} f(P)$가 최대가 되는 단위벡터 $\vec v$는 $\cos \theta = 1$인 벡터, 즉 $\grad f(P)$와 같은 방향의 단위벡터이다.
+이때 $\grad f(P)$의 크기가 $\vec v$-방향 변화율이다.
+이러한 원리에서 $\grad f(P) = \left(\diffp{f}{x_1}(P), \dots, \diffp{f}{x_n}(P)\right)$는 좌표계의 선택과 무관함을 알 수 있다.
+또 $\dD_{\vec v} f(P)$가 최소가 되는 단위벡터 $\vec v$는 $\cos \theta = -1$인 벡터, 즉 $\vec v$가 $- \grad f(P)$와 같은 방향의 단위벡터임을 안다.
+같은 이유에서 $\grad f(P)$와 수직인 방향으로의 순간변화율은 $0$이다.
+
+\subsubsection{일급미분가능함수}
+
+\begin{definition}
+    $n$-공간의 한 열린 집합에서 정의된 함수 $f(x_1, \dots, x_n)$의 각 편도함수
+    \begin{equation*}
+        \diffp{f}{x_1},\quad\dots,\quad \diffp{f}{x_n}
+    \end{equation*}
+    이 모두 연속함수이면, $f$를 일급함수 또는 $\mathcal C^1$ 함수라고 한다.
+\end{definition}
+
+\begin{theorem}
+    $n$-공간의 열린 집합에서 정의된 일급함수는 미분가능 함수이다.
+\end{theorem}
+
 \end{document}
