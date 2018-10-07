@@ -370,4 +370,26 @@
     \diffp*{f\bigl(x_1(s, t), \dots, x_n(s, t)\bigr)}{t} &= \diffp{f}{x_1} \diffp{x_1}{t} + \dots + \diffp{f}{x_n} \diffp{x_n}{t}
 \end{align*}
 으로 표현된다.
+
+\subsection{기울기 벡터와 등위면}
+
+\begin{theorem}
+    $n$-공간의 열린 집합 $U$에서 정의된 일급함수 $f$에 대하여 점 $P$에서 기울기 벡터 $\grad f(P)$는 점 $P$가 속하는 등위면 $S := \{X \in U \mid f(X) = f(P)\}$에 수직이다.
+\end{theorem}
+
+\begin{proof}
+    점 $P$에서 등위면 $S$의 접평면은 $P$를 지나는 $S$ 속의 곡선들의 접선들로 이루어져 있다.
+    다시 말하면 미분가능한 곡선
+    \begin{equation*}
+        X: \mathbb R \rightarrow S, \qquad X(0) = P
+    \end{equation*}
+    에 대하여 속도벡터 $X'(0)$은 점 $P$에서 $S$의 접평면에 속하고, 역으로 접평면의 원소들은 모두 이러한 방법으로 얻어진다.
+    따라서 이러한 곡선 $X$에 대하여
+    \begin{equation*}
+        \grad f(P) \cdot X'(0) = 0
+    \end{equation*}
+    그런데 $X(t) \in S$이므로 $f(X(t)) = f(P)$이다.
+    이를 $t$에 대하여 미분하면, 연쇄법칙 덕분에 $\grad f(X(t)) \cdot X'(t) = 0$임을 안다.
+    이제 $t = 0$을 대입하여 원하는 결론을 얻는다.
+\end{proof}
 \end{document}
