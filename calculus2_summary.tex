@@ -4,6 +4,9 @@
 \usepackage{microtype}
 \usepackage{bm}
 
+\setcounter{secnumdepth}{4}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
 \usepackage{mathpazo}
 \setmainfont{TeX Gyre Pagella}
 \setmainhangulfont[ItalicFont={*},ItalicFeatures={FakeSlant=.167}]{NanumMyeongjo}
@@ -12,10 +15,10 @@
 \usepackage{amsmath,mathtools,amssymb,amsthm,thmtools}
 
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}
+\newtheorem{definition}{정의}[subsubsection]
 
 \theoremstyle{theorem}
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{정리}[subsubsection]
 
 \usepackage{diffcoeff}
 \diffset[roman = true]
@@ -23,8 +26,9 @@
 \renewcommand{\vec}[1]{\bm{\mathit{#1}}}
 \newcommand{\vecz}{\bm{\mathrm{0}}}
 \newcommand{\dd}{\mathrm{d}}
+\newcommand{\dD}{\mathrm{D}}
 
-\title{수학 및 연습 2\\내용 정리}
+\title{수학 및 연습 2\\내용 요약}
 
 \author{이재호\\\href{mailto:jaeho.lee@snu.ac.kr}{\texttt{jaeho.lee@snu.ac.kr}}}
 
@@ -36,5 +40,132 @@
 
 \setcounter{section}{9}
 \section{다변수함수}
+\subsection{그래프와 등위면}
+\subsubsection{다변수함수}
 
+\begin{definition}
+    $n$-공간의 부분집합 $U$에서 정의된 함수
+    \begin{equation*}
+        f: U \rightarrow \mathbb R
+    \end{equation*}
+    가 주어졌다고 하자.
+    즉, $U$의 각 점 $X = (x_1, \dots, x_n)$에 대하여 실수 $f(X) = f(x_1, \dots, x_n)$이 대응된다고 하자.
+    이때 함수 $f$를 $n$변수함수라 하고, $n \geq 2$이면 다변수함수라고도 한다.
+\end{definition}
+
+\subsubsection{함수와 그래프}
+
+\begin{definition}
+    $n$-공간의 부분집합 $U$에서 정의된 다변수함수 $f$의 그래프는
+    \begin{equation*}
+        \{(x_1, \dots, x_n, z) \in \mathbb R^{n + 1} \mid (x_1, \dots, x_n) \in U,\ z = f(x_1, \dots, x_n)\}
+    \end{equation*}
+    으로 정의한다.
+\end{definition}
+
+\subsubsection{일차함수의 기울기}
+
+\begin{definition}
+    이변수 일차함수 $z = ax + by + c$의 기울기는 기울기 벡터
+    \begin{equation*}
+        (a, b) = a \vec i + b \vec j
+    \end{equation*}
+    로 나타낸다.
+\end{definition}
+
+\begin{theorem}
+    단위벡터 $\vec v = (v_1, \dots, v_n)$에 대하여, 일차함수
+    \begin{equation*}
+        z = \vec a \cdot \vec x + c = a_1 x_1 + \dots + a_n x_n + c
+    \end{equation*}
+    의 $\vec v$-방향 기울기는
+    \begin{equation*}
+        \vec a \cdot \vec v = a_1 v_1 + \dots + a_n v_n
+    \end{equation*}
+    이다.
+\end{theorem}
+
+\begin{proof}
+    일차함수 $z$의 $\vec v$-방향 기울기는
+    \begin{equation*}
+        \frac{z(\vec x + t \vec v) - z(\vec x)}{t} = \frac{(\vec a \cdot (\vec x + t \vec v) + c) - (\vec a \cdot \vec x + c)}{t} = \vec a \cdot \vec v
+    \end{equation*}
+    이다.
+\end{proof}
+
+\subsubsection{등위면}
+
+\begin{definition}
+    $n$-공간의 한 부분집합 $U$에서 정의된 다변수함수 $f: U \rightarrow \mathbb R$와 실수 $c$에 대하여, $f$에 대한 $c$의 역상(inverse image)
+    \begin{equation*}
+        f^{-1}(c) := \{X \in U \mid f(X) = c\}
+    \end{equation*}
+    를 $f$의 $c$-등위면(level surface) 또는 $c$-등가면이라고 부른다.
+    즉, 등위면은 함숫값이 같은 점들의 모임이다.
+\end{definition}
+
+\subsection{연속함수}
+
+\begin{definition}
+    $n$-공간의 부분집합 $U$에서 정의된 함수 $f: U \rightarrow \mathbb R$와 $U$의 한 점 $P$에 대하여
+    \begin{equation*}
+        \lim_{X \rightarrow P} f(X) = f(P)
+    \end{equation*}
+    일 때, $f$는 점 $P$에서 연속이라고 정의한다.
+    달리 쓰면,
+    \begin{equation*}
+        \lim_{X \rightarrow P} |f(X) - f(P)| = 0
+    \end{equation*}
+    이다.
+\end{definition}
+
+\subsubsection{연속함수}
+
+\begin{definition}
+    함수 $f: U \rightarrow \mathbb R$가 정의역 $U$의 모든 점에서 연속이면, $f$를 연속함수라고 한다.
+\end{definition}
+
+\subsubsection{최대최소 정리}
+\paragraph{유계인 닫힌 집합}
+
+\begin{definition}
+    양수 $r$에 대하여 $n$-공간의 한 점 $P$를 중심으로 하고 반지름의 길이가 $r$인 열린 공(open ball)은
+    \begin{equation*}
+        \mathbb B^n (P, r) := \{X \in \mathbb R^n \mid |X - P| < r\}
+    \end{equation*}
+    를 뜻한다. 또  $n$-공간의 한 점 $P$를 중심으로 하고 반지름의 길이가 $r$인 닫힌 공(closed ball)은
+    \begin{equation*}
+        \overline{\mathbb B}^n (P, r) := \{X \in \mathbb R^n \mid |X - P| \leq r\}
+    \end{equation*}
+    를 뜻한다.
+    
+    열린 공 또는 닫힌 공을 그냥 공이라고 하고, 1차원 공은 구간, 2차원 공은 원판이다.
+\end{definition}
+
+\begin{definition}
+    $n$-공간의 부분 집합 $U$가 유계(bounded)라는 것은 $U$를 포함하는 공이 존재한다는 뜻이다.
+    이는 함수
+    \begin{equation*}
+        U \rightarrow \mathbb R,\quad X \mapsto |X|
+    \end{equation*}
+    가 유계 함수라는 것과 동치이다.
+\end{definition}
+
+\begin{definition}
+    $n$-공간에서 경계를 포함하는 부분집합을 닫힌 집합이라고 부른다.
+\end{definition}
+
+\begin{theorem} [최대최소 정리]
+    $n$-공간의 유계인 닫힌 집합에서 정의된 연속함수는 최댓값과 최솟값을 가진다.
+\end{theorem}
+
+\subsection{방향미분과 편미분}
+\begin{definition}
+    $n$-공간의 열린 집합 $U$에서 정의된 함수 $f: U \rightarrow \mathbb R$와 $U$의 한 점 $P$ 및 벡터 $\vec v$에 대하여, 극한값
+    \begin{equation*}
+        \dD_{\vec v} f(P) := \lim_{t \rightarrow 0} \frac{f(P + t \vec v) - f(P)}{t} = \diff*{}{t}{0} f(P + t \vec v)
+    \end{equation*}
+    가 존재하면 이 값을 점 $P$에서 $f$의 $\vec v$-방향미분계수 또는 $\vec v$-방향 순간변화율이라고 한다.
+    단위벡터 $\vec v$에 대하여 $\vec v$-방향미분계수의 기하학적 의미는 함수 $f$의 그래프를 직선 $P + t \vec v$ 위에 한정하여 그렸을 때, 점 $(P, f(P))$에서 $f$의 그래프의 기울기를 뜻한다.
+\end{definition}
 \end{document}
