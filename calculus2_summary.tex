@@ -14,11 +14,13 @@
 
 \usepackage{amsmath,mathtools,amssymb,amsthm,thmtools}
 
-\theoremstyle{definition}
+% \theoremstyle{definition}
 \newtheorem{definition}{정의}[subsubsection]
 
-\theoremstyle{theorem}
+% \theoremstyle{theorem}
 \newtheorem{theorem}{정리}[subsubsection]
+
+\newtheorem{corollary}{따름정리}[subsubsection]
 
 \usepackage{diffcoeff}
 \diffset[roman = true]
@@ -402,4 +404,60 @@
         \diff*{\int_c^d f(x, y)\,\dd y}{x} = \int_c^d \diffp{f}{x} (x, y)\,\dd y
     \end{equation*}
 \end{theorem}
+
+\subsection{이계미분}
+
+\begin{definition}
+    $n$-공간의 열린집합 $U$에서 정의된 일급함수 $f$의 일계 편도함수
+    \begin{equation*}
+        \dD_1 f, \dots, \dD_n f: U \rightarrow \mathbb R
+    \end{equation*}
+    가 모두
+    \begin{enumerate}
+        \item 미분가능함수이면, $f$를 두번 미분가능한 함수
+        \item 일급함수이면, $f$를 이급함수 또는 $\mathcal C^2$ 함수
+    \end{enumerate}
+    라고 한다.
+    물론 이급함수는 두번 미분가능한 함수이다.
+
+    이때 $f$는 점 $P \in U$에서 모두 $n^2$개의 이계 편미분계수
+    \begin{equation*}
+        \dD_i \dD_j f(P) = \diffp{f}{x_i, x_j}
+    \end{equation*}
+    를 가진다.
+    $\dD_i \dD_i f$는 줄여서 $\dD_i^2 f$로 쓰기로 한다.
+\end{definition}
+
+\begin{theorem}[편미분 교환법칙]
+    $n$-공간의 열린집합에서 정의된 이급함수 (혹은 단지 두번 미분가능한 함수) $f$와 정의역의 임의의 점 $P$에 대하여
+    \begin{equation*}
+        \dD_i \dD_j f(P) = \dD_j \dD_i f(P) \qquad (1 \leq i, j \leq n)
+    \end{equation*}
+    이다.
+\end{theorem}
+
+\begin{proof}
+    $i$번째 변수와 $j$번째 변수 사이의 관계를 조사하므로 이변수함수 $f(x, y)$에 대하여 밝히면 된다.
+    먼저 정의역에 포함되는 조그만 직사각형 $[a, b] \times [c, d]$ 속에서
+    \begin{align*}
+        \int_c^u \dD_i \dD_j f(x, t)\,\dd t &= \diffp*{\int_c^y \dD_2 f(x, t)\, \dd t}{x}\\
+                                            &= \diffp*{\bigl(f(x, y) - f(x, c)\bigr)}{x}\\
+                                            &= \dD_1 f(x, y) - \dD_1 f(x, c)
+    \end{align*}
+    를 얻는다.
+    한편 이 식의 왼쪽항이 $y$에 대하여 미분가능하고 따라서 오른쪽항도 $y$에 대하여 미분가능하며, 이로부터 양변을 $y$로 미분하면
+    \begin{equation*}
+        \dD_1 \dD_2 f(x, y) = \dD_2 \dD_1 f(x, y)
+    \end{equation*}
+    를 얻는다.
+\end{proof}
+
+\begin{corollary}
+    $n$-공간의 열린집합에서 정의된 $k$급함수 $f$의 고계편도함수
+    \begin{equation*}
+        \dD_{i_1} \dD_{i_2} \dots \dD_{i_k} f \qquad (1 \leq i_1, i_2, \dots, i_k \leq n)
+    \end{equation*}
+    는 $\dD_{i_1}, \dD_{i_2}, \dots, \dD_{i_k}$의 순서를 바꾸어도 변화가 없다.
+\end{corollary}
+
 \end{document}
