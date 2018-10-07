@@ -340,4 +340,34 @@
     $n$-공간의 열린 집합에서 정의된 일급함수는 미분가능 함수이다.
 \end{theorem}
 
+\subsection{연쇄법칙}
+
+\begin{theorem}[연쇄법칙]
+    $n$-공간의 열린 집합 $U$에서 정의된 미분가능한 함수 $f$와 구간 $I$에서 정의된 미분가능한 곡선 $X: I \rightarrow U$에 대하여 다음이 성립한다:
+    \begin{equation*}
+        \forall t \in I \qquad \diff*{f(X(t))}{t} = \grad f(X(t)) \cdot X'(t)
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    먼저 $t \in I$를 고정하면, 절댓값이 아주 작은 실수 $\Delta t$에 대하여
+    \begin{align*}
+        &\hphantom{=\ \ } f\bigl(X(t + \Delta t)\bigr) - f\bigl(X(t)\bigr)\\
+        &= \grad f\bigl(X(t)\bigr) \cdot \bigl(X(t + \Delta t) - X(t)\bigr) + o(|X(t + \Delta t) - X(t)|)\\
+        &= \grad f\bigl(X(t)\bigr) \cdot \bigl(X'(t)\Delta t o(\Delta t)\bigr) + o(\Delta t)\\
+        &= \grad f\bigl(X(t)\bigr) \cdot X'(t) \Delta t + o(\Delta t)
+    \end{align*}
+    이므로 원하는 결론을 얻는다.
+\end{proof}
+
+연쇄법칙을 좌표의 성분을 써서 표현하면
+\begin{equation*}
+    \diff*{f\bigl(x_1(t), \dots, x_n(t)\bigr)}{t} = \diffp{f}{x_1} \diff{x_1}{t} + \dots + \diffp{f}{x_n} \diff{x_n}{t}
+\end{equation*}
+이다. 만약 $X = (x_1, \dots, x_n)$가 두 개의 변수 $s, t$에 의존하면, 연쇄법칙은
+\begin{align*}
+    \diffp*{f\bigl(x_1(s, t), \dots, x_n(s, t)\bigr)}{s} &= \diffp{f}{x_1} \diffp{x_1}{s} + \dots + \diffp{f}{x_n} \diffp{x_n}{s}\\
+    \diffp*{f\bigl(x_1(s, t), \dots, x_n(s, t)\bigr)}{t} &= \diffp{f}{x_1} \diffp{x_1}{t} + \dots + \diffp{f}{x_n} \diffp{x_n}{t}
+\end{align*}
+으로 표현된다.
 \end{document}
