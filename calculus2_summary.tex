@@ -491,7 +491,7 @@ $f$가 이급이면
 \end{equation*}
 이다.
 
-\begin{lemma}
+\begin{lemma} \label{lem:second_ord}
     $n$-공간의 열린 집합에서 정의된 이급함수 $f$와 정의역의 임의의 점 $P$ 및 벡터 $\vec v$에 대하여
     \begin{equation*}
         \diff*[2]{}{t}{0} f(P + t \vec v) = \dD_{\vec v}^2 f(P)
@@ -529,4 +529,240 @@ $f$가 이급이면
 \end{align*}
 이다.
 
+\subsection{테일러 전개와 근삿값 이론}
+
+\begin{definition}
+    함수 $f(x_1, \dots, x_n)$가 정의역의 한 점 $P$에서 미분가능하다고 하자.
+    이때 벡터 $\vec v$의 크기가 작으면,
+    \begin{equation*}
+        f(P + \vec v) \approx f(P) + \grad f(P) \cdot \vec v
+    \end{equation*}
+    이다.
+    여기에서
+    \begin{equation*}
+        f(P) + \grad f(P) \cdot \vec v
+    \end{equation*}
+    를 점 $P$에서 $f(P + \vec v)$의 일차근삿값이라고 부른다.
+\end{definition}
+
+\begin{theorem}[테일러 정리]
+    $n$-공간의 열린집합 $U$에서 정의된 $k$번 미분가능한 함수 $f$가 주어져 있다.
+    이때 $U$의 한 점 $P$와 벡터 $\vec v$에 대하여 선분 $[P, P + \vec v] := \{P + t \vec v \mid 0 \leq t < 1\}$이 $U$에 포함된다고 하자.
+    그러면 등식
+    \begin{equation*}
+        f(P + \vec v) = f(P) + \dD_{\vec v} f(P) + \frac{1}{2!} \dD_{\vec v}^2 f(P) + \dots + \frac{1}{(k - 1)!} \dD_{\vec v}^{k - 1} f(P) + \frac{1}{k!} \dD_{\vec v}^k f(P + t^* \vec v)
+    \end{equation*}
+    를 만족시키는 $t^*$가 $0$과 $1$ 사이에 존재한다.
+\end{theorem}
+
+\begin{proof}
+    도움정리~\ref{lem:second_ord}에서 살표보았듯이, 함수
+    \begin{equation*}
+        g(t) := f(P + t \vec v)
+    \end{equation*}
+    에 대하여
+    \begin{equation*}
+        g^{(i)}(t) = \dD_{\vec v}^i f(P + t \vec v), \quad i = 0, 1, \dots, k
+    \end{equation*}
+    임을 귀납법을 사용하여 알 수 있다.
+
+    먼저 $i = 0$일 때는 당연히 성립함을 알 수 있다.
+    그리고 귀납법 가정에 의하여
+    \begin{equation*}
+        g^{(i + 1)}(t) = \diff*{\bigl(\dD_{\vec v}^i f\bigr)}{t} (P + t \vec v) = \bigl(\dD_{\vec v} \bigl(\dD_{\vec v}^i f\bigr)\bigr)(P + t \vec v)
+    \end{equation*}
+    이므로 원하는 결론을 얻는다.
+
+    이제 $g(t)$에 일변수 테일러 전개를 응용하면
+    \begin{equation*}
+        g(t) = g(0) + g'(0) t + \dots + \frac{g^{k - 1}(0)}{(k - 1)!} t^{k - 1} + \frac{g^{(k)}(t^*)}{k!} t^k
+    \end{equation*}
+    을 만족시키는 $t^* \in (0, t)$의 존재를 안다.
+    여기서 $t = 1$로 두면 증명이 끝난다.
+\end{proof}
+
+\subsubsection{근사다항식과 잉여항}
+
+\begin{definition}
+    $n$-공간의 점 $P$ 근방에서 정의된 $k$급 함수 $f(X)$에 대하여
+    \begin{equation*}
+        T_k f(P, \vec v) := f(P) + \dD_{\vec v}f(P) + \dots + \frac{1}{k!} \dD_{\vec v}^k f(P)
+    \end{equation*}
+    를 점 $P$에서 $f(P + \vec v)$의 $k$차 근삿값이라고 부른다.
+\end{definition}
+
+위 식에서 $\vec v = X - P = (x_1 - p_1, \dots, x_n - p_n)$로 두면
+\begin{equation*}
+    X \mapsto T_k f(P, X - P)
+\end{equation*}
+는 점 $P$에서 $f(X)$의 $k$차 근사(다항)식이다.
+
+\paragraph{잉여항}
+\begin{definition}
+    함수 $f$의 테일러 전개에서
+    \begin{equation*}
+        R_k f(P, \vec v) := f(P + \vec v) - T_k f(P, \vec v)
+    \end{equation*}
+    를 $k$차 잉여항 또는 $k$차 나머지항이라고 부른다.
+\end{definition}
+
+\begin{corollary} \label{cor:residue}
+    $n$-공간의 열린집합 $U$에서 정의된 이급함수 $f$와 $U$에 포함되는 선분 $\{P + t \vec v \mid 0 \leq t \leq 1\}$에 대하여
+    \begin{equation*}
+        M_2 := \max \{|\dD_i \dD_j f(P + t \vec v)| \mid 1 \leq i, j \leq n,\ 0 \leq t \leq 1\}
+    \end{equation*}
+    이라 하자.
+    그러면 $f$의 일차 잉여항 $R_1 f(P, \vec v)$는 부등식
+    \begin{equation*}
+        |R_1 f(P, \vec v)| \leq \frac{M_2}{2} (|v_1| + \dots + |v_n|)^2
+    \end{equation*}
+    을 만족시킨다.
+\end{corollary}
+
+\begin{proof}
+    생략.
+\end{proof}
+
+\begin{corollary}
+    따름정리~\ref{cor:residue}에서 $f$가 $k + 1$급 함수라고 하면, 등식
+    \begin{equation*}
+        R_k f(P, \vec v) = \frac{1}{(k + 1)!} \dD_{\vec v}^{k + 1} f(P^*)
+    \end{equation*}
+    을 만족시키는 $P^* \in [P, P + \vec v]$가 존재한다.
+    이때
+    \begin{align*}
+        M_{k + 1} &:= M_{k + 1} f(P, \vec v)\\
+                  &:= \max \{|\dD_{i_0} \dots \dD_{i_k} f(P + t \vec v)| \mid 1 \leq i_0, \dots, i_k \leq n,\ 0 \leq t \leq 1\}
+    \end{align*}
+    로 두면
+    \begin{equation*}
+        \bigl|D_{\vec v}^{k + 1} f(P^*)\bigr| \leq M_{k + 1} (|v_1| + \dots + |v_n|)^{k + 1}
+    \end{equation*}
+    이다.
+    특히 다음 부등식을 얻는다:
+    \begin{equation*}
+        |R_k f(P, \vec v)| \leq M_{k + 1} \frac{(|v_1| + \dots + |v_n|)^{k + 1}}{(k + 1)!}.
+    \end{equation*}
+\end{corollary}
+
+위 정리의 마지막 식에서 $\lim_{\vec v \rightarrow \vecz} \frac{(|v_1| + \dots + |v_n|)^{k + 1}}{|\vec v|^k} = 0$이므로 다음 정리는 $f$가 $k + 1$급 함수일 때에는 자명하고, $k$급일 때에는
+\begin{equation*}
+    R_k f(P, \vec v) = R_{k - 1} f(P, \vec v) - \frac{1}{k!} \dD_{\vec v}^k f(P) = \frac{1}{k!} \bigl(\dD_{\vec v}^k f(P^*) - \dD_{\vec v}^k f(P)\bigr) = o(|\vec v|^k)
+\end{equation*}
+이므로 다음을 얻는다.
+
+\begin{corollary}
+    $k$급 함수 $f$에 대하여 점 $P$에서 $k$차 잉여함수
+    \begin{equation*}
+        \vec v \mapsto R_k f(P, \vec v)
+    \end{equation*}
+    는 $o(|\vec v|^k)$이다.
+\end{corollary}
+
+\subsubsection{테일러 전개의 유일성}
+
+\begin{theorem}[테일러 전개의 유일성]
+    함수 $f$가 $n$-공간의 한 점 $P$ 근방에서 정의된 $k$급 함수이면, 등식
+    \begin{equation*}
+        f(P + \vec x) = T_x (\vec x) + R_k (\vec x) \quad (|\vec x| \ll 1)
+    \end{equation*}
+    를 만족시키는 차수가 $k$ 이하인 다항식 $T_k(\vec x)$와 $o(|\vec x|^k)$인 함수 $R_k(\vec x)$가 각각 유일하게 존재한다.
+\end{theorem}
+\begin{proof}
+    생략.
+\end{proof}
+
+\subsection{임계점 정리}
+\subsubsection{최대점과 최소점}
+
+\begin{definition}
+    주어진 실숫값 함수에 대하여 정의역의 점 중에서 함숫값이 최대인 점을 그 함수의 최대점이라 한다.
+    즉, 점 $P$가 함수 $f: U \rightarrow \mathbb R$의 최대점이라는 것은 $P \in U$이고, $U$의 임의의 점 $Q$에 대하여
+    \begin{equation*}
+        f(P) \geq f(Q)
+    \end{equation*}
+    라는 뜻이다.
+    함수의 최대점에서 함숫값을 그 함수의 최댓값이라고 한다.
+
+    마찬가지로, 주어진 실숫값 함수에 대하여 정의역의 점 중에서 함숫값이 최소인 점을 그 함수의 최소점이라 한다.
+    즉, 점 $P$가 함수 $f: U \rightarrow \mathbb R$의 최소점이라는 것은 $P \in U$이고, $U$의 임의의 점 $Q$에 대하여
+    \begin{equation*}
+        f(P) \leq f(Q)
+    \end{equation*}
+    라는 뜻이다.
+    함수의 최소점에서 함숫값을 그 함수의 최솟값이라고 한다.
+\end{definition}
+
+\subsubsection{극점}
+\begin{definition}
+    주어진 실숫값 함수에 대하여 함숫값이 국소적으로 최대인 점을 극대점이라 하고, 국소적으로 최소인 점을 극소점이라 한다.
+    극대점과 극소점을 통틀어 극점이라고 부른다.
+    극대점에서의 함숫값과 극소점에서의 함숫값을 각각 극댓값, 극솟값이라고 부른다.
+    또 극점에서의 함숫값을 극값이라고 한다.
+\end{definition}
+
+\subsubsection{임계점}
+\begin{definition}
+    $n$-공간의 열린 집합에서 정의된 미분가능한 함수 $f$에서 모든 방향미분계수가 영인 점을 함수 $f$의 임계점이라고 부른다.
+\end{definition}
+
+\begin{theorem}[임계점 정리]
+    $n$-공간의 열린 집합에서 정의된 미분가능한 함수의 극점은 임계점이다.
+\end{theorem}
+
+\subsection{헤세 판정법}
+\subsubsection{안장점}
+
+\begin{theorem}
+    임계점이지만 극점이 아닌 점을 안장점이라고 한다.
+\end{theorem}
+
+\subsubsection{헤세 행렬}
+
+\begin{definition}
+    이급함수 $f(x_1, \dots, x_n)$에 대하여, 정의역의 점 $P$에서의 이계 편미분계수들로 이루어진 $n \times n$차 행렬
+    \begin{equation*}
+        f''(P) := \bigl(\dD_i \dD_j f(P)\bigr) = \left(\diffp{f}{x_i, x_j}(P)\right)_{1 \leq i, j \leq n}
+    \end{equation*}
+\end{definition}
+
+\subsubsection{행렬의 음양}
+
+\begin{definition}
+    이차 대칭행렬 $A = \begin{pmatrix}a & b\\b & c\end{pmatrix}$에서
+    \begin{enumerate}
+        \item $ac - b^2 > 0$이고 $a > 0$일 때, $A$를 양행렬이라 하고 $A > O$으로 쓴다.
+        \item $ac - b^2 > 0$이고 $a < 0$일 때, $A$를 음행렬이라 하고 $A < O$으로 쓴다.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    대칭행렬 $A = \begin{pmatrix}a & b\\b & c\end{pmatrix}$에 대응되는 이차형식
+    \begin{equation*}
+        q(x, y) = ax^2 + 2bxy + cy^2 = \begin{pmatrix}x & y\end{pmatrix} A \begin{pmatrix}x\\y\end{pmatrix}
+    \end{equation*}
+    에 대하여
+    \begin{enumerate}
+        \item $A > O$이면, 원점 $(0, 0)$은 $q(x, y)$의 최소점이다.
+        \item $A < O$이면, 원점 $(0, 0)$은 $q(x, y)$의 최대점이다.
+        \item $\det A < O$이면, 원점 $(0, 0)$은 $q(x, y)$의 안장점이다.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    생략.
+\end{proof}
+
+\begin{theorem}[헤세 판정법]
+    좌표평면의 열린집합에서 정의된 이급함수 $f(x, y)$는 임계점 $P$에서
+    \begin{enumerate}
+        \item $f''(P) > O$이면, $P$는 극소점이다.
+        \item $f''(P) < O$이면, $P$는 극대점이다.
+        \item $\det f''(P) < O$이면, $P$는 안장점이다.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    생략.
+\end{proof}
 \end{document}
