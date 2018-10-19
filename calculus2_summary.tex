@@ -545,7 +545,7 @@ $f$가 이급이면
     를 점 $P$에서 $f(P + \vec v)$의 일차근삿값이라고 부른다.
 \end{definition}
 
-\begin{theorem}[테일러 정리]
+\begin{theorem}[테일러 정리] \label{thm:taylor}
     $n$-공간의 열린집합 $U$에서 정의된 $k$번 미분가능한 함수 $f$가 주어져 있다.
     이때 $U$의 한 점 $P$와 벡터 $\vec v$에 대하여 선분 $[P, P + \vec v] := \{P + t \vec v \mid 0 \leq t < 1\}$이 $U$에 포함된다고 하자.
     그러면 등식
@@ -556,7 +556,7 @@ $f$가 이급이면
 \end{theorem}
 
 \begin{proof}
-    도움정리~\ref{lem:second_ord}에서 살표보았듯이, 함수
+    도움정리~\ref{lem:second_ord}에서 살펴보았듯이, 함수
     \begin{equation*}
         g(t) := f(P + t \vec v)
     \end{equation*}
@@ -620,7 +620,23 @@ $f$가 이급이면
 \end{corollary}
 
 \begin{proof}
-    생략.
+    테일러 정리~\ref{thm:taylor}에서
+    \begin{equation*}
+        R_1 f(P, \vec v) = \frac 12 \dD_{\vec v}^2 f(P^*)
+    \end{equation*}
+    인 $P^*$가 선분 $[P, P + \vec v] = \{P + t \vec v \mid 0 \leq t \leq 1\}$이 존재한다.
+    그런데
+    \begin{align*}
+        \bigl| \dD_{\vec v} ^2 f(P^*) \bigr| &= \left| \sum_{i, j = 1}^n v_i v_j \dD_i \dD_j f(P^*) \right|\\
+                                             &\leq \sum_{i, j = 1}^n |v_i| |v_j| |\dD_i \dD_j f(P^*)|\\
+                                             &\leq M_2 \sum_{i, j = 1}^n |v_i| |v_j|\\
+                                             &= M_2 \bigl( |v_1| + \dots + |v_n| \bigr)^2
+    \end{align*}
+    이므로
+    \begin{equation*}
+        | R_1 f(P, \vec v) | \leq M_2 \bigl( |v_1| + \dots + |v_n| \bigr)^2
+    \end{equation*}
+    이다.
 \end{proof}
 
 \begin{corollary}
@@ -669,7 +685,19 @@ $f$가 이급이면
     를 만족시키는 차수가 $k$ 이하인 다항식 $T_k(\vec x)$와 $o(|\vec x|^k)$인 함수 $R_k(\vec x)$가 각각 유일하게 존재한다.
 \end{theorem}
 \begin{proof}
-    생략.
+    함수 $T_k$와 $R_k$의 존재성은 보았으므로, 유일성만 밝히면 된다.
+    함수 $f(P + \vec x)$가 차수 $k$ 이하의 또 다른 다항함수 $\tilde T_k (\vec x)$와 $o\bigl( |\vec x|^k \bigr)$인 $\tilde R_k (\vec x)$의 합으로 나타내어진다고 하자.
+    그러면
+    \begin{equation*}
+        T_k(\vec x) - \tilde T_k(\vec x) = \tilde R_k(\vec x) - R_k(\vec x)
+    \end{equation*}
+    이다.
+    좌변은 $k$차 이하의 다항함수인 반면 우변은 $o\bigl( |\vec x|^k \bigr)$이므로, 양변 모두 영함수이다.
+    따라서
+    \begin{equation*}
+        T_k(\vec x) = \tilde T_k(\vec x),\qquad R_k(\vec x) = \tilde R_k(\vec x)
+    \end{equation*}
+    이다.
 \end{proof}
 
 \subsection{임계점 정리}
@@ -736,21 +764,34 @@ $f$가 이급이면
     \end{enumerate}
 \end{definition}
 
-\begin{lemma}
+\begin{lemma} \label{lem:quadratic}
     대칭행렬 $A = \begin{pmatrix}a & b\\b & c\end{pmatrix}$에 대응되는 이차형식
     \begin{equation*}
-        q(x, y) = ax^2 + 2bxy + cy^2 = \begin{pmatrix}x & y\end{pmatrix} A \begin{pmatrix}x\\y\end{pmatrix}
+        q(x, y) = ax^2 + 2bxy + cy^2 = \bigl(x \quad y\bigr)\ A \begin{pmatrix}x\\y\end{pmatrix}
     \end{equation*}
     에 대하여
     \begin{enumerate}
         \item $A > O$이면, 원점 $(0, 0)$은 $q(x, y)$의 최소점이다.
         \item $A < O$이면, 원점 $(0, 0)$은 $q(x, y)$의 최대점이다.
-        \item $\det A < O$이면, 원점 $(0, 0)$은 $q(x, y)$의 안장점이다.
+        \item $\det A < 0$이면, 원점 $(0, 0)$은 $q(x, y)$의 안장점이다.
     \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-    생략.
+    먼저 $a \neq 0$인 경우를 보자.
+    \begin{equation*}
+        q(x, y) = ax^2 + 2bxy + cy^2 = a \left(\left(x + \frac ba y\right)^2 + \frac{ac - b^2}{a^2} y^2\right)
+    \end{equation*}
+    으로 쓸 수 있다.
+    따라서 $A > O$이면 $ac- b^2 > 0$이므로 $(x, y) \neq (0, 0)$일 때 $q(x, y) > 0$이며 원점에서 최소점이다.
+    또한 $A < O$이면 원점에서 최대점이다.
+    $\det A < 0$일 때 $q(x, y)$는 양의 값과 음의 값을 동시에 가지며, 원점은 임계점이므로 안장점이다.
+    
+    $a = 0$의 경우, $\det A = -b^2 \leq 0$이므로 $\det A < 0$의 경우만 고려한다.
+    \begin{equation*}
+        q(x, y) = 2bxy + cy^2 = by \left(2x + \frac cby\right)
+    \end{equation*}
+    는 양과 음의 값을 모두 가지며 원점은 임계점이므로 원점이 안장점이다.
 \end{proof}
 
 \begin{theorem}[헤세 판정법]
@@ -758,11 +799,34 @@ $f$가 이급이면
     \begin{enumerate}
         \item $f''(P) > O$이면, $P$는 극소점이다.
         \item $f''(P) < O$이면, $P$는 극대점이다.
-        \item $\det f''(P) < O$이면, $P$는 안장점이다.
+        \item $\det f''(P) < 0$이면, $P$는 안장점이다.
     \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-    생략.
+    이급함수 $f$에 대해서 $f''(P) > O$이면 $f$의 이차 편도함수 $\dD_i \dD_j f$는 연속이다.
+    따라서 $P$ 근방의 점 $P^*$에 대해서도 $f''(P^*) > O$이다.
+    $|\vec v| \ll 1$인 $\vec v = v_1 \vec e_1 + v_2 \vec e_2$에 대해서 $P$에서 $f(P +
+    \vec v)$의 테일러 전개는 $P$가 임계점이므로
+    \begin{equation*}
+         f(P + \vec v) = f(P) + \frac 12 \sum_{i, j = 1}^2 v_i v_j \dD_i \dD_j f(P + t^* \vec v)
+    \end{equation*}
+    인 $t^* \in (0, 1)$이 존재한다.
+    이 때 함수 $g_{\vec v}$를
+    \begin{equation*}
+        g_{\vec v}(\vec x) := \sum_{i, j = 1}^2 \dD_i \dD_j f(P + t^*\vec v) x_i x_j
+    \end{equation*}
+    와 같이 정의하자.
+    $\vec v$는 매우 작으므로 $f''(P + t^* \vec v) > O$이고, 도움정리~\ref{lem:quadratic}에 의해 $g_{\vec v}(\vec x)$은 $\vec x = \vecz$일 때 최솟값이다.
+    그런데 $g_{\vec v}(\vecz) = 0$이므로 $g_{\vec v}(\vec x) \geq 0$이며,
+    \begin{equation*}
+        f(P + \vec v) - f(P) = \frac{g_{\vec v}(\vec x)}{2} \geq 0
+    \end{equation*}
+    이다.
+    그러므로 $|\vec v| \ll 1$인 임의의 $\vec v$에 대해서
+    \begin{equation*}
+        f(P + \vec v) - f(P) \geq 0
+     \end{equation*}
+     이고, 따라서 $P$는 극소점이다.
 \end{proof}
 \end{document}
